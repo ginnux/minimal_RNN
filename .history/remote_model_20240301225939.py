@@ -130,7 +130,4 @@ class MinimalRNN(nn.Module):
 
         for i in range(self.num_layers):
             inputs, h[i] = self.layers[i](inputs, h[i])
-
-        h = torch.stack(h, dim=0)
-
         return inputs, h

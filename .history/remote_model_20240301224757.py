@@ -124,13 +124,6 @@ class MinimalRNN(nn.Module):
         self.batch_first = batch_first
 
     def forward(self, inputs, h=None):
-
-        if h is None:
-            h = [None] * self.num_layers
-
         for i in range(self.num_layers):
-            inputs, h[i] = self.layers[i](inputs, h[i])
-
-        h = torch.stack(h, dim=0)
-
+            inputs, h = self.layers[i](inputs, h)
         return inputs, h
