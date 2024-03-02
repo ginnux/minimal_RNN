@@ -132,10 +132,9 @@ class MinimalRNN(nn.Module):
         for i in range(self.num_layers):
             inputs, h[i] = self.layers[i](inputs, h[i])
 
-        if self.num_layers > 1:
-            if isBatch is True:
-                h = torch.stack(h, dim=0)
-            else:
-                h = torch.cat(h, dim=0)
+        if isBatch is True and self.num_layers > 1:
+            h = torch.stack(h, dim=0)
+        else:
+            h = torch.cat(h, dim=0)
 
         return inputs, h
